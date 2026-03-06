@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UTS ASJ</title>
+</head>
+<body>
+
+<h2>Tambah User</h2>
+
+<form action="http://10.63.115.217:8000/users" method="post" enctype="multipart/form-data">
+    Nama: <input type="text" name="name"><br><br>
+    Email: <input type="text" name="email"><br><br>
+    Foto: <input type="file" name="photo"><br><br>
+    <button type="submit">Tambah</button>
+</form>
+
+<hr>
+
+<button onclick="loadUsers()">Lihat Users</button>
+<ul id="list"></ul>
+  
+<script>
+async function loadUsers(){
+    const res = await fetch("http://localhost:5000/users");
+    const data = await res.json();
+
+    let list = document.getElementById("list");
+    list.innerHTML = "";
+
+    data.forEach(user=>{
+        list.innerHTML += `<li>${user.name} - ${user.email}</li>`;
+    });
+}
+</script>
+
+</body>
+</html>
